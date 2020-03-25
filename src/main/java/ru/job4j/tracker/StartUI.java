@@ -37,7 +37,7 @@ public class StartUI {
     }
   }
 
-  public static void deleleItem(Input input, Tracker tracker)  {
+  public static void deleteItem(Input input, Tracker tracker)  {
     System.out.println("=== Delete Item ====");
     String id = input.askStr("Enter id removable item: ");
     if (tracker.delete(id)) {
@@ -75,7 +75,7 @@ public class StartUI {
       } else if (select == 2) {
         StartUI.replaceItem(input, tracker);
       } else if (select == 3) {
-        StartUI.deleleItem(input, tracker);
+        StartUI.deleteItem(input, tracker);
       } else if (select == 4) {
         StartUI.findItemById(input, tracker);
       } else if (select == 5) {
