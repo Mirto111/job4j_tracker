@@ -7,7 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.Test;
 
-public class ValidateStubInputTest {
+public class ValidateInputTest {
 
   @Test
   public void whenInvalidInput() {
@@ -15,7 +15,7 @@ public class ValidateStubInputTest {
     PrintStream out = System.out;
     System.setOut(new PrintStream(mem));
     String[] data = {"one", "1"};
-    ValidateInput input = new ValidateStubInput(data);
+    ValidateInput input = new ValidateInput(new StubInput(data));
     input.askInt("Enter");
     assertThat(
         mem.toString(),
@@ -30,7 +30,7 @@ public class ValidateStubInputTest {
     PrintStream out = System.out;
     System.setOut(new PrintStream(mem));
     String[] data = {"8", "1"};
-    ValidateInput input = new ValidateStubInput(data);
+    ValidateInput input = new ValidateInput(new StubInput(data));
     input.askInt("Enter", 2);
     assertThat(
         mem.toString(),
