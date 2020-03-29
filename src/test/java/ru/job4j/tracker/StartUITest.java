@@ -5,6 +5,8 @@ import static org.junit.Assert.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 import org.junit.Test;
 
@@ -13,10 +15,10 @@ public class StartUITest {
   @Test
   public void whenExit() {
     StubInput input = new StubInput(
-        new String[]{"0"}
+        List.of("0")
     );
     StubAction action = new StubAction();
-    new StartUI().init(input, new Tracker(), new UserAction[]{action});
+    new StartUI().init(input, new Tracker(), List.of(action));
     assertThat(action.isCall(), is(true));
   }
 
@@ -26,10 +28,10 @@ public class StartUITest {
     PrintStream def = System.out;
     System.setOut(new PrintStream(out));
     StubInput input = new StubInput(
-        new String[]{"0"}
+        List.of("0")
     );
     StubAction action = new StubAction();
-    new StartUI().init(input, new Tracker(), new UserAction[]{action});
+    new StartUI().init(input, new Tracker(), List.of(action));
     String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
         .add("Menu.")
         .add("0. Stub action")

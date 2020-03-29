@@ -1,16 +1,16 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tracker {
 
-  private final Item[] items = new Item[100];
+  private final List<Item> items = new ArrayList<>();
   private int ids = 1;
-  private int size = 0;
 
   public Item add(Item item) {
     item.setId(generateId());
-    items[size++] = item;
+    items.add(item);
     return item;
   }
 
@@ -20,8 +20,8 @@ public class Tracker {
 
   private int indexOf(String id) {
     int rsl = -1;
-    for (int index = 0; index < size; index++) {
-      if (items[index].getId().equals(id)) {
+    for (int index = 0; index < items.size(); index++) {
+      if (items.get(index).getId().equals(id)) {
         rsl = index;
         break;
       }
@@ -31,26 +31,21 @@ public class Tracker {
 
   public Item findById(String id) {
     int index = indexOf(id);
-    return index != -1 ? items[index] : null;
+    return index != -1 ? items.get(index) : null;
   }
 
-  public Item[] findByName(String key) {
-    Item[] rsl = new Item[size];
-    int count = 0;
-    for (int index = 0; index < size; index++) {
-      Item item = items[index];
+  public List<Item> findByName(String key) {
+    List<Item> rsl = new ArrayList<>();
+    for (Item item : items) {
       if (item.getName().equals(key)) {
-        rsl[count] = item;
-        count++;
+        rsl.add(item);
       }
     }
-    rsl = Arrays.copyOf(rsl, count);
     return rsl;
   }
 
-  public Item[] findAll() {
-    Item[] itemsWithoutNull = Arrays.copyOf(items, size);
-    return itemsWithoutNull;
+  public List<Item> findAll() {
+    return items;
   }
 
   public boolean replace(String id, Item item) {
@@ -58,7 +53,7 @@ public class Tracker {
     boolean rsl = false;
     if (index != -1) {
       item.setId(id);
-      items[index] = item;
+      items.set(index, item);
       rsl = true;
     }
     return rsl;
@@ -68,12 +63,9 @@ public class Tracker {
     int index = indexOf(id);
     boolean rsl = false;
     if (index != -1) {
-      System.arraycopy(items, index + 1, items, index, size -  index);
-      items[size - 1] = null;
-      size--;
+      items.remove(index);
       rsl = true;
     }
     return rsl;
-
   }
 }

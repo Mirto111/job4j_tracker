@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 import org.junit.Test;
 
 public class ValidateInputTest {
@@ -14,7 +15,7 @@ public class ValidateInputTest {
     ByteArrayOutputStream mem = new ByteArrayOutputStream();
     PrintStream out = System.out;
     System.setOut(new PrintStream(mem));
-    String[] data = {"one", "1"};
+    List<String> data = List.of("one", "1");
     ValidateInput input = new ValidateInput(new StubInput(data));
     input.askInt("Enter");
     assertThat(
@@ -29,7 +30,7 @@ public class ValidateInputTest {
     ByteArrayOutputStream mem = new ByteArrayOutputStream();
     PrintStream out = System.out;
     System.setOut(new PrintStream(mem));
-    String[] data = {"8", "1"};
+    List<String> data = List.of("8", "1");
     ValidateInput input = new ValidateInput(new StubInput(data));
     input.askInt("Enter", 2);
     assertThat(

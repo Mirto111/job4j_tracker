@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.StringJoiner;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class FindByNameActionTest {
     tracker.add(item);
     tracker.add(item1);
     FindByNameAction act = new FindByNameAction();
-    act.execute(new StubInput(new String[]{"fix bug"}), tracker);
+    act.execute(new StubInput(List.of("fix bug")), tracker);
     String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
         .add(item.toString() + " ")
         .toString();
